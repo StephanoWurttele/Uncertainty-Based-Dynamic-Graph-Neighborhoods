@@ -41,7 +41,7 @@ label_list = sorted(label_list)
 for fldr in pancreas_list:
 	temp_dir.append(pancreas_dir + fldr + "/") # ./our_pancreas_train_with_graph/pancreas_ct/Pancreas-CT/Pancreas_0001/
 
-print(temp_dir)
+# print(temp_dir)
 for dirr in temp_dir:
 	# temp_dir2 = os.listdir(dirr) # "fecha" - pancreas0001 - "pancreas - " codigo
 	# folders_2 = os.listdir(dirr + temp_dir2[0] + "/")#  # "fecha" - pancreas0001 - "pancreas - " codigo/Pancreas-99667
