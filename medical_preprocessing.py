@@ -26,9 +26,8 @@ def assemble_vol(vol):
 #r = np.load("/home/ufuk/Desktop/graph_based_cn/gcn_refinement/ref.0012.nii.gz.npy", allow_pickle=True)
 
 
-
-pancreas_dir = "/mnt/disk3/pancreas_train_with_graph/pancreas_ct/Pancreas-CT/"
-label_dir = "/mnt/disk3/pancreas_train_with_graph/pancreas_ct/TCIA_pancreas_labels-02-05-2017/"
+pancreas_dir = "./pancreas_train_with_graph/pancreas_ct/Pancreas-CT/"
+label_dir = "./pancreas_train_with_graph/pancreas_ct/TCIA_pancreas_labels-02-05-2017/"
 temp_dir = []
 data_dir = []
 
@@ -45,12 +44,15 @@ for fldr in pancreas_list:
 for dirr in temp_dir:
 	temp_dir2 = os.listdir(dirr)#AAA
 	folders_2 = os.listdir(dirr + temp_dir2[0] + "/")#AAA
+	print(temp_dir2)
+	print(folders_2)
+	exit(0)
 	data_dir.append(dirr + temp_dir2[0] + "/" + folders_2[0])#BBB
 
 
-pancreas_nifti = "/mnt/disk3/pancreas_train_with_graph/pancreas_ct/pancreas_nifti/"
-pancreas_npy = "/mnt/disk3/pancreas_train_with_graph_0106/pancreas_ct/pancreas_npy_3d/"
-pancreas_label_npy = "/mnt/disk3/pancreas_train_with_graph_0106/pancreas_ct/pancreas_label_npy_3d/"
+pancreas_nifti = "./pancreas_train_with_graph/pancreas_ct/pancreas_nifti/"
+pancreas_npy = "./pancreas_train_with_graph_0106/pancreas_ct/pancreas_npy_3d/"
+pancreas_label_npy = "./pancreas_train_with_graph_0106/pancreas_ct/pancreas_label_npy_3d/"
 
 
 #
