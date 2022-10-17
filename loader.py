@@ -167,11 +167,17 @@ class DataReader(torch.utils.data.Dataset):
 
 			return data
 
-		else:			
-			in_arr = np.load(pancreas_dir + "/" + self.mode + "/" + self.pname[self.indexes[index]] + "/" + self.pname[self.indexes[index]] + ".npy")
+		else:
+			print("in __getitem__")		
+			# in_arr = np.load(pancreas_dir + "/" + self.mode + "/" + self.pname[self.indexes[index]] + "/" + self.pname[self.indexes[index]] + ".npy")
+			in_arr = np.load(pancreas_dir + "/" + self.mode + "/" + self.pname[self.indexes[index]] + "/256cap/" + self.pname[self.indexes[index]] + ".npy")
 			# msk_arr = np.load(label_dir + "/" + self.mode + "/" + self.pname[self.indexes[index]] + "/" + self.pname[self.indexes[index]] + ".npy").astype(np.uint8)
-
-			input_img = torch.from_numpy(in_arr)
+			print(in_arr.shape)
+			# print(np.amax(in_arr)) 2289
+			# print(np.amin(in_arr)) 0 
+			# input("?")
+			# exit(0)
+			input_img = torch.from_numpy(in_arr) # error here so far
 			# msk = torch.from_numpy(msk_arr)
 
 			input_img = input_img.permute((2,0,1))

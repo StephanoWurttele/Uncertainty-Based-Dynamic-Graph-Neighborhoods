@@ -20,7 +20,9 @@ def vol_dsc(vol, gt_vol):
 
 def make_prediction(divider, img):
 	print(img.shape)
+	# input("just printed img.shape")
 	slice_count = img.shape[1]
+	print("slice count", slice_count)
 	pred_tensor = torch.zeros((slice_count, 324, 324)).to(device)
 
 	model.eval()
@@ -52,6 +54,7 @@ def make_prediction(divider, img):
 
 	orig_pred = np.zeros((1,slice_count, 512, 512))
 	reduced_vol = arrtools.largest_connected_component3d(vol=seg_vol_np)
+	print(reduced_vol.shape)
 	roi_limits = arrtools.bounding_cube(reduced_vol)
 
 	orig_pred[0,roi_limits[0]:roi_limits[3], roi_limits[1]:roi_limits[4], roi_limits[2]:roi_limits[5]] = reduced_vol[roi_limits[0]:roi_limits[3], roi_limits[1]:roi_limits[4], roi_limits[2]:roi_limits[5]]
@@ -72,24 +75,22 @@ divider = 6
 scores = []
 
 mp = "pancreas_ct\checkpoint.pth"
-print("Flag1")
-# print(checkpoint.pth)
 model = torch.load(mp, map_location=device)
-print("Flag2")
 model = model.to(device)
 scores = []
-print("Flag3")
 with torch.no_grad():
 	for i, data in enumerate(test_loader):
-		# print("Flag: ", i)
-		# print("Data", data)
+		print("Flag: ", i)
+		print("Data", len(data))
+		print(data.keys())
+		print(data['image'].shape)
+		print(data['pname'])
 		# exit(0)
 
 		img = data['image'].unsqueeze(0)
 		# img_class = data['label'].unsqueeze(0)
 		pan_orig = data['pname']
 
-		print(pan_orig)
 		score = make_prediction(divider, img)
 		print(score.max())
 		print("Shape: ", score.shape)
@@ -98,6 +99,7 @@ with torch.no_grad():
 		# print("DSC Score: {}".format(score))
 
 	scores = np.array(scores)
-	print(scores.shape)
-	np.save("Almenara\Pred_npys\ejemplo0013-aquije", scores[0])
+	print("max is ", np.amax(scores[0][0]))
+	print(scores[0][0].shape)
+	np.save("Almenara/Pred_npys/fullvalues/ejemplo0013-aquije", scores[0])
 	# print("Mean {} Std {}".format(np.mean(scores),np.std(scores)))

@@ -84,7 +84,8 @@ for i in range(len(pancreas_nifti_list)):
 	print(img.shape)
 	directory = pancreas_list[i]
 	path = os.path.join(pancreas_npy, pancreas_nifti_list[i])
-	os.mkdir(path)
+	if (not os.path.exists(path)):
+		os.mkdir(path)
 
 	temp_list = []
 
